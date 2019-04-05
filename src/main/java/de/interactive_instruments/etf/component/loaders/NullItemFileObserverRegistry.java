@@ -17,14 +17,33 @@
  * European Public Administrations Programme (http://ec.europa.eu/isa)
  * through Action 1.17: A Reusable INSPIRE Reference Platform (ARE3NA).
  */
-package de.interactive_instruments.etf.testdriver;
+package de.interactive_instruments.etf.component.loaders;
+
+import java.nio.file.Path;
+import java.util.List;
 
 /**
+ * Realizes the Null Object pattern
+ *
  * @author Jon Herrmann ( herrmann aT interactive-instruments doT de )
  */
-public interface ExecutableTestSuiteLifeCycleListenerMediator extends ExecutableTestSuiteLifeCycleListener {
+public final class NullItemFileObserverRegistry implements ItemFileObserverRegistry {
 
-    void registerListener(final ExecutableTestSuiteLifeCycleListener observer);
+    private static NullItemFileObserverRegistry instance = new NullItemFileObserverRegistry();
 
-    void deregisterListener(final ExecutableTestSuiteLifeCycleListener observer);
+    private NullItemFileObserverRegistry() {}
+
+    public static NullItemFileObserverRegistry instance() {
+        return instance;
+    }
+
+    @Override
+    public void register(final Path path, final List<? extends ItemFileLoaderFactory> factories) {
+        // null object pattern
+    }
+
+    @Override
+    public void deregister(final List<? extends ItemFileLoaderFactory> factories) {
+        // null object pattern
+    }
 }
